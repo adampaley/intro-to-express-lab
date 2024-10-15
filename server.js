@@ -55,6 +55,39 @@ app.get('/collectibles/:index', (req, res) => {
     }
 })
 
+// 4. Filter Shoes by Query Parameters 
+// localhost:3000/shoes + query
+
+const shoes = [
+    { name: "Birkenstocks", price: 50, type: "sandal" },
+    { name: "Air Jordans", price: 500, type: "sneaker" },
+    { name: "Air Mahomeses", price: 501, type: "sneaker" },
+    { name: "Utility Boots", price: 20, type: "boot" },
+    { name: "Velcro Sandals", price: 15, type: "sandal" },
+    { name: "Jet Boots", price: 1000, type: "boot" },
+    { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+];
+
+app.get('/shoes', (req, res) => {
+    const { 'max-price': maxPrice, 'min-price': minPrice, type} = req.query
+    let shownShoes = shoes
+
+    if (minPrice) {
+        shownShoes = shownShoes.filter(shoe => shoe.price >= Number(minPrice))
+    }
+
+    if (maxPrice) {
+        shownShoes = shownShoes.filter(shoe => shoe.price <= Number(maxPrice))
+    }
+
+    if (type) {
+        shownShoes = shownShoes.filter(shoe => shoe.type.toLowerCase() === type.toLowerCase())
+    }
+
+    res.send(shownShoes)
+})
+
+
 // listen on port 3000 for request
 app.listen(3000, () => {
   console.log("Listening on port 3000")  
