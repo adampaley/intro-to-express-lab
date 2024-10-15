@@ -84,7 +84,7 @@ app.get('/shoes', (req, res) => {
         shownShoes = shownShoes.filter(shoe => shoe.type.toLowerCase() === type.toLowerCase())
     }
 
-    res.send(shownShoes)
+    res.json(shownShoes)
 })
 
 
