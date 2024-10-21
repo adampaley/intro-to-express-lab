@@ -29,7 +29,7 @@ app.get('/greetings/:name', (req, res) => {
 app.get('/roll/:number', (req, res) => {
     const number = Number(req.params.number)
 
-    if (!number) {
+    if (!number && number !== 0) {
         return res.send("You must specify a number.")
     } else {
         res.send(`You rolled a ${Math.floor(Math.random() * number)}.`)
